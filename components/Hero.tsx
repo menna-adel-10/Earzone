@@ -1,6 +1,7 @@
 import React from 'react'
 import {Box, Typography} from '@mui/material'
 import Button from './Button';
+import Link from 'next/link';
 
 
 const Hero = () => {
@@ -39,7 +40,7 @@ const Hero = () => {
           <Typography variant="body1" sx={{ color: "#727272", width: "35vw", fontSize: "1.2rem" }}>
               See how these noise cancelling headphones combine our best ever noise cancelling technology with superlative sound for a truly remarkable listening experience.</Typography>
           <Button variant='contained' color='var(--primary)'>
-              See Product
+              <Link href="/4">See Product</Link>
           </Button>
     
       </Box>

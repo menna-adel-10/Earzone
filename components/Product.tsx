@@ -1,15 +1,31 @@
-import { Container, Box, Typography } from '@mui/material'
+import { Container, Box, Typography, Button as MuiButton } from '@mui/material'
 import Image from 'next/image'
-import React from 'react'
+import React, { useState } from 'react'
 import Button from './Button';
 import ProductCounter from './ProductCounter';
+import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { addToCart, selectCart } from '../store/cartSlice';
 
+interface Props {
+    product: any;
+}
 
-const Product = () => {
+const Product = ({ product }: Props) => {
+    const {cart} = useAppSelector((state) => state.cart);
+     const [count, setCount] = useState(0);
+
+    const handleDecrement = () => {
+        if (count > 0) {
+            setCount(count - 1);
+        }
+    };
+    const dispatch = useAppDispatch();
+    console.log(cart);
+
   return (
       <Container sx={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
           <Image
-              src="/assets/product-xx99-mark-two-headphones/desktop/image-category-page-preview.jpg"
+              src={product.image?.desktop.replace(".", "")}
               alt='headphones'
               width={500}
               height={500}
@@ -46,14 +62,39 @@ const Product = () => {
                   fontSize: "5rem",
               }}
           >
-              WH-1000XM5</Typography>
-          <Typography variant="body1" sx={{ color: "#727272", width: "35vw", fontSize: "1.2rem" }}>
-              See how these noise cancelling headphones combine our best ever noise cancelling technology with superlative sound for a truly remarkable listening experience.</Typography>
+                  {product.name}
+              </Typography>
+              <Typography
+                  variant="body1"
+                  sx={{ color: "#727272", width: "35vw", fontSize: "1.2rem" }}
+              >
+               {product.description}
+              </Typography>
+              <Typography variant="h5">{ product.price }</Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-              <ProductCounter />
+              <Box sx={{
+          backgroundColor: "#f1f1f1",
+          padding: ".5rem",
+          marginRight: ".5rem",
+          marginTop: "3rem"
+      }}>
+          <MuiButton onClick={handleDecrement}>-</MuiButton>
+          {count}
+          <MuiButton onClick={() => setCount(count + 1)}>+</MuiButton>
+    </Box>
               <Button
                   variant='contained'
-                  color='var(--primary)'>
+                      color='var(--primary)'
+                      onClick={() =>
+                          dispatch(
+                              addToCart({
+                                  id: product.id,
+                                  name: product.name,
+                                  price: product.price,
+                                  itemCount: count,
+                                  image: product.image.mobile.replace(".", ""),
+                              }))}
+                  >
                   Add to Cart
                   </Button>  
               </Box>
