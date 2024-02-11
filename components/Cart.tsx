@@ -1,23 +1,30 @@
-import { Box, Typography } from '@mui/material'
-import React from 'react'
-import {Button} from './Button'
-import Image from 'next/image'
-import { useAppSelector } from '../store/hooks'
+import { Box, Typography, Button as MUIButton } from "@mui/material";
+import React from "react";
+import { Button } from "./Button";
+import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { clearCart } from "../store/cartSlice";
+import Link from "next/link";
 
 const Cart = () => {
-    const { cart } = useAppSelector((state) => state.cart)
+  const { cart } = useAppSelector((state) => state.cart);
+  const dispatch = useAppDispatch();
+
   return (
-      <Box sx={{
+    <Box
+      sx={{
+        position: "absolute",
+        height: "100vh",
+        width: "99.2vw",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        top: 90,
+      }}
+    >
+      <Box
+        sx={{
           position: "absolute",
-          height: "100vh",
-          width: "99.2vw",
-          backgroundColor: "rgba(0, 0, 0, 0.5)",
-          top: 100,
-      }}>
-          <Box sx={{
-          position: "absolute",
-          right: 290,
-          top: 20,
+          right: 300,
+          top: 30,
           minHeight: "20vh",
           width: "20vw",
           backgroundColor: "white",
@@ -25,40 +32,74 @@ const Cart = () => {
           padding: "1.5rem",
           textTransform: "uppercase",
           display: "flex",
-          flexDirection: "column"
-          
-      }}>
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography>Cart</Typography>
-                <Typography>Remove All</Typography>
-              </Box> 
-              <Box>
-              {cart.map((product) => {
-                  return (
-                      <Box key={product.id}>
-                          <Image
-                              src={product.image}
-                              alt='headphones'
-                              width={50}
-                              height={50}
-                          />
-                      </Box>
-                  );
-              })} 
-              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography variant='body1'>{product.name}</Typography>
-                  <Typography variant='body2'>{product.price}</Typography>
-                  </Box>
-             </Box>
-              <Button
-                  color='var(--primary)'
-                  variant='contained'
-                  sx={{ width: "100%" }}>
-                  Checkout
-              </Button>
-    </Box>
+          flexDirection: "column",
+        }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography>Cart</Typography>
+          <MUIButton onClick={() => dispatch(clearCart())}>
+            Remove All
+          </MUIButton>
+        </Box>
+        {cart.map((product) => {
+          return (
+            <Box
+              key={product.id}
+              sx={{
+                display: "flex",
+                margin: "1rem 0",
+                justifyContent: "space-between",
+              }}
+            >
+              <Box sx={{ display: "flex" }}>
+                <Image
+                  src={product.image.mobile}
+                  width={50}
+                  height={50}
+                  alt="headphones"
+                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    marginLeft: "1rem",
+                  }}
+                >
+                  <Typography variant="body1">{product.name}</Typography>
+                  <Typography variant="body2" sx={{ color: " #6f7275" }}>
+                    ${product.price}
+                  </Typography>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "flex-end",
+                }}
+              >
+                <Typography sx={{ fontSize: "0.75rem" }}>Count</Typography>
+                <Typography variant="body1" sx={{ fontWeight: 800 }}>
+                  {product.count}
+                </Typography>
+              </Box>
+            </Box>
+          );
+        })}
+        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Typography>Total</Typography>
+          <Typography>$$$</Typography>
+        </Box>
+        <Button
+          color="var(--primary)"
+          variant="contained"
+          sx={{ width: "100%", marginTop: "1rem" }}
+        >
+          <Link href="/checkout">Checkout</Link>
+        </Button>
       </Box>
-  )
-}
+    </Box>
+  );
+};
 
-export default Cart
+export default Cart;

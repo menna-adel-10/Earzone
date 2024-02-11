@@ -1,7 +1,7 @@
 import { Container, Box, Typography, Button as MuiButton } from '@mui/material'
 import Image from 'next/image'
 import React, { useState } from 'react'
-import Button from './Button';
+import {Button} from './Button';
 import ProductCounter from './ProductCounter';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { addToCart, selectCart } from '../store/cartSlice';
@@ -74,7 +74,7 @@ const Product = ({ product }: Props) => {
               <Box sx={{ display: "flex", alignItems: "center" }}>
               <Box sx={{
           backgroundColor: "#f1f1f1",
-          padding: ".5rem",
+          padding: ".7rem",
           marginRight: ".5rem",
           marginTop: "3rem"
       }}>
@@ -82,7 +82,8 @@ const Product = ({ product }: Props) => {
           {count}
           <MuiButton onClick={() => setCount(count + 1)}>+</MuiButton>
     </Box>
-              <Button
+                  <Button
+                      sx={{ marginTop: "3rem" }}
                   variant='contained'
                       color='var(--primary)'
                       onClick={() =>
@@ -92,7 +93,7 @@ const Product = ({ product }: Props) => {
                                   name: product.name,
                                   price: product.price,
                                   itemCount: count,
-                                  image: product.image.mobile.replace(".", ""),
+                                  image: product.image?.mobile.replace(".", ""),
                               }))}
                   >
                   Add to Cart

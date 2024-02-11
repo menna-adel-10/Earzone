@@ -1,6 +1,6 @@
 import React from 'react'
 import {Box, Typography} from '@mui/material'
-import Button from './Button';
+import {Button} from './Button';
 import Link from 'next/link';
 
 
