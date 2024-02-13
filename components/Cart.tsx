@@ -53,7 +53,7 @@ const Cart = () => {
             >
               <Box sx={{ display: "flex" }}>
                 <Image
-                  src={product.image.mobile}
+              src={product.image}
                   width={50}
                   height={50}
                   alt="headphones"
@@ -80,7 +80,7 @@ const Cart = () => {
               >
                 <Typography sx={{ fontSize: "0.75rem" }}>Count</Typography>
                 <Typography variant="body1" sx={{ fontWeight: 800 }}>
-                  {product.count}
+                   {product.count}
                 </Typography>
               </Box>
             </Box>

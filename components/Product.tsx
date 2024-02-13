@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import {Button} from './Button';
 import ProductCounter from './ProductCounter';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { addToCart, selectCart } from '../store/cartSlice';
+import { addToCart, startNewCart } from '../store/cartSlice';
 
 interface Props {
     product: any;
@@ -87,6 +87,9 @@ const Product = ({ product }: Props) => {
                   variant='contained'
                       color='var(--primary)'
                       onClick={() =>
+                      
+                      {
+                          dispatch(startNewCart());
                           dispatch(
                               addToCart({
                                   id: product.id,
@@ -94,7 +97,9 @@ const Product = ({ product }: Props) => {
                                   price: product.price,
                                   itemCount: count,
                                   image: product.image?.mobile.replace(".", ""),
-                              }))}
+                              })
+                          )}
+                      }
                   >
                   Add to Cart
                   </Button>  
