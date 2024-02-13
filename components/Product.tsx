@@ -5,7 +5,7 @@ import {Button} from './Button';
 import ProductCounter from './ProductCounter';
 import { useAppDispatch, useAppSelector } from '../store/hooks';
 import { addToCart, startNewCart } from '../store/cartSlice';
-
+import { APIProduct } from '../types'; 
 interface Props {
     product: any;
 }
@@ -70,11 +70,14 @@ const Product = ({ product }: Props) => {
               >
                {product.description}
               </Typography>
-              <Typography variant="h5">{ product.price }</Typography>
+              <Typography variant="h5"
+                  sx={{ marginTop: "2rem", fontWeight: 700 }}>
+                  ${product.price}
+              </Typography>
               <Box sx={{ display: "flex", alignItems: "center" }}>
-              <Box sx={{
+                <Box sx={{
           backgroundColor: "#f1f1f1",
-          padding: ".7rem",
+          padding: ".5rem",
           marginRight: ".5rem",
           marginTop: "3rem"
       }}>
@@ -95,8 +98,8 @@ const Product = ({ product }: Props) => {
                                   id: product.id,
                                   name: product.name,
                                   price: product.price,
-                                  itemCount: count,
                                   image: product.image?.mobile.replace(".", ""),
+                                  Count: product.count,
                               })
                           )}
                       }

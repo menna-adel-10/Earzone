@@ -1,11 +1,13 @@
 import type { NextPage } from 'next'
-import { Container } from '@mui/material';
+import { Container, Box } from '@mui/material';
 import Nav from '../components/Nav';
 import Hero from '../components/Hero';
+import CategoryCardContainer from '../components/CategoryCardContainer';
 
 
 const Home: NextPage = () => {
   return (
+    <div>
     <div style={{
       backgroundImage: "url(./assets/home/desktop/image-hero.jpg)",
       height: "100vh",
@@ -20,6 +22,8 @@ const Home: NextPage = () => {
         <Hero />
      </Container>
     </div>
+      <CategoryCardContainer />
+      </div>
   )
 }
 

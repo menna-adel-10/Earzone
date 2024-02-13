@@ -1,7 +1,8 @@
 import { Box, Button } from '@mui/material'
+import { Props } from 'next/script';
 import React, { useState } from 'react'
 
-const ProductCounter = () => {
+const ProductCounter = ({ productId }: Props) => {
     const [count, setCount] = useState(0);
 
     const handleDecrement = () => {

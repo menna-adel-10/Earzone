@@ -28,12 +28,14 @@ const Nav = () => {
           alignItems: "center",
         }}
       >
+      <Link href="/">
         <Image
           src="/assets/shared/desktop/logo.svg"
           alt="logo"
           width={150}
           height={40}
-        />
+          />
+          </Link>
         <ul
           style={{
             marginRight: "2rem",
